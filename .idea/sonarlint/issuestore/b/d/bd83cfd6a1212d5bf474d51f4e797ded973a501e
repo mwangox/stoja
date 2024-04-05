@@ -1,0 +1,11 @@
+
+¤
+java:S2629"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(ƒÎ×Öúÿÿÿÿ8 ù‚ªê1J$d0e2b959-0781-4bdf-8d92-17613110fd08
+Ÿ
+java:S2629"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(‘Ä—È8 ù‚ªê1J$9a0b4925-6cfb-4506-9fca-64195709fa85
+¯
+java:S1128"gRemove this unused import 'io.grpc.netty.shaded.io.netty.handler.ssl.util.InsecureTrustManagerFactory'.(‹¤ñÔýÿÿÿÿ8«ù‚ªê1J$9a49d79e-d579-4700-af72-935b98fed7e6
+z
+java:S1128"7Remove this unused import 'javax.net.ssl.TrustManager'.(¬ªò 8«ù‚ªê1J$4399f674-6519-44d2-830a-7c472d5fe30b
+l
+java:S1128")Remove this unused import 'java.io.File'.(†Ð¥Å8«ù‚ªê1J$cff77c14-28af-4d43-9979-809d6df249a6
