@@ -1,5 +1,6 @@
 doc.txt
 gradle.properties
+src/main/java/com/mwangox/stoja/Main.java
 ../.idea
 .gradle
 build/
