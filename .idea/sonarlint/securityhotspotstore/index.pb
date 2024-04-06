@@ -48,3 +48,5 @@ c
 doc.txt,e/d/ed84975e7794a549a1fff735efb7002b91750d42
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
+;
+jitpack.yml,3/f/3f384c5ac91d01ea9ab11981ab87f1d958f63284
