@@ -12,7 +12,7 @@ plugins {
     id 'maven-publish'
    // id 'com.github.johnrengelman.shadow' version '8.1.1'
    // id 'java'
-    id 'signing'
+  //  id 'signing'
 }
 
 
@@ -20,7 +20,7 @@ ext {
     jakartaAnnotationApiVersion = "1.3.5"
 }
 
-group = 'com.mwangox.stoja'
+group = 'com.github.mwangox'
 version = '1.0.0'
 
 java {
@@ -80,11 +80,11 @@ sourceSets {
 }
 
 
-jar {
-    manifest {
-        attributes "Main-Class": "com.mwangox.stoja.Main"
-    }
-}
+//jar {
+//    manifest {
+//        attributes "Main-Class": "com.mwangox.stoja.Main"
+//    }
+//}
 
 //shadowJar {
 //    mergeServiceFiles()
@@ -127,19 +127,19 @@ publishing {
 
     }
 
-    repositories {
-        maven {
-            name = 'stoja'
-            //url = layout.buildDirectory.dir('repo')
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = 'israelmwangoka@outlook.com'
-                password = 'Matamba@3005'
-            }
-        }
-    }
+//    repositories {
+//        maven {
+//            name = 'stoja'
+//            //url = layout.buildDirectory.dir('repo')
+//            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+//            credentials {
+//                username = 'mwangox'
+//                password = 'xxxx'
+//            }
+//        }
+//    }
 }
 
-signing {
-    sign publishing.publications.stoja
-}
+//signing {
+//    sign publishing.publications.stoja
+//}

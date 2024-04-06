@@ -1,4 +1,6 @@
 doc.txt
+gradle.properties
+../.idea
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
