@@ -143,3 +143,9 @@ publishing {
 //signing {
 //    sign publishing.publications.stoja
 //}
+
+
+wrapper {
+    gradleVersion = "8.4"
+    distributionType = Wrapper.DistributionType.ALL
+}
