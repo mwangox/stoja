@@ -146,6 +146,6 @@ publishing {
 
 
 wrapper {
-    gradleVersion = "8.4"
+    gradleVersion = "9.0"
     distributionType = Wrapper.DistributionType.ALL
 }
