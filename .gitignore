@@ -1,5 +1,5 @@
-./doc.txt
-./gradle.properties
+doc.txt
+gradle.properties
 ../.idea
 .gradle
 build/
