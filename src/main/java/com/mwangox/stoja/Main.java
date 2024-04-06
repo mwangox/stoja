@@ -2,10 +2,6 @@ package com.mwangox.stoja;
 
 import com.mwangox.stoja.config.StooConfig;
 import io.grpc.*;
-import io.grpc.netty.shaded.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-
-import javax.net.ssl.TrustManager;
-import java.io.File;
 import java.util.logging.Logger;
 
 

@@ -59,42 +59,64 @@ public class StooClient implements StooOperations{
 
     @Override
     public String get(String namespace, String profile, String key) {
-        Stoo.GetResponse response = client.getService(Stoo.GetRequest.newBuilder()
-                .setNamespace(namespace)
-                .setProfile(profile)
-                .setKey(key)
-                .build());
-        return response.getData();
+        Stoo.GetResponse response = null;
+        try {
+            response = client.getService(Stoo.GetRequest.newBuilder()
+                    .setNamespace(namespace)
+                    .setProfile(profile)
+                    .setKey(key)
+                    .build());
+        }catch (StatusRuntimeException e){
+            throwStooProtocolException(e);
+        }
+        return response != null ? response.getData() : null;
     }
+
+
 
     @Override
     public String set(String namespace, String profile, String key, String value) {
-        Stoo.SetKeyResponse response = client.setKeyService(Stoo.SetKeyRequest.newBuilder()
-                .setNamespace(namespace)
-                .setProfile(profile)
-                .setKey(key)
-                .setValue(value)
-                .build());
-        return response.getData();
+        Stoo.SetKeyResponse response  = null;
+        try{
+            response = client.setKeyService(Stoo.SetKeyRequest.newBuilder()
+                    .setNamespace(namespace)
+                    .setProfile(profile)
+                    .setKey(key)
+                    .setValue(value)
+                    .build());
+        }catch (StatusRuntimeException e){
+            throwStooProtocolException(e);
+        }
+        return response != null ? response.getData() : null;
     }
 
     @Override
     public String delete(String namespace, String profile, String key) {
-        Stoo.DeleteKeyResponse response = client.deleteKeyService(Stoo.DeleteKeyRequest.newBuilder()
-                .setNamespace(namespace)
-                .setProfile(profile)
-                .setKey(key)
-                .build());
-        return response.getData();
+        Stoo.DeleteKeyResponse response = null;
+        try{
+            response = client.deleteKeyService(Stoo.DeleteKeyRequest.newBuilder()
+                    .setNamespace(namespace)
+                    .setProfile(profile)
+                    .setKey(key)
+                    .build());
+        }catch (StatusRuntimeException e){
+            throwStooProtocolException(e);
+        }
+        return response != null ? response.getData() : null;
     }
 
     @Override
     public Map<String, String> getAll(String namespace, String profile) {
-        Stoo.GetByNamespaceAndProfileResponse response = client.getServiceByNamespaceAndProfile(Stoo.GetByNamespaceAndProfileRequest.newBuilder()
+        Stoo.GetByNamespaceAndProfileResponse response = null;
+        try{
+            response = client.getServiceByNamespaceAndProfile(Stoo.GetByNamespaceAndProfileRequest.newBuilder()
                 .setNamespace(namespace)
                 .setProfile(profile)
                 .build());
-        return response.getDataMap();
+        }catch (StatusRuntimeException e){
+            throwStooProtocolException(e);
+        }
+        return response != null ? response.getDataMap() : null;
     }
 
     @Override
@@ -124,5 +146,9 @@ public class StooClient implements StooOperations{
     public void verifyDefaultNamespaceAndProfile(){
         StooAssertions.shouldNotBeNullOrEmpty(stooConfig.getDefaultProfile(), "defaultProfile must be defined to use default methods");
         StooAssertions.shouldNotBeNullOrEmpty(stooConfig.getDefaultNamespace(), "defaultNamespace must be defined to use default methods");
+    }
+
+    private static void throwStooProtocolException(StatusRuntimeException e) {
+        throw new StooProtocolException(e.getStatus().getCode().name(), e.getStatus().getDescription());
     }
 }
