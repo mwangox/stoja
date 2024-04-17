@@ -91,6 +91,22 @@ public class StooClient implements StooOperations{
     }
 
     @Override
+    public String setSecret(String namespace, String profile, String key, String value) {
+        Stoo.SetKeyResponse response  = null;
+        try{
+            response = client.setSecretKeyService(Stoo.SetKeyRequest.newBuilder()
+                    .setNamespace(namespace)
+                    .setProfile(profile)
+                    .setKey(key)
+                    .setValue(value)
+                    .build());
+        }catch (StatusRuntimeException e){
+            throwStooProtocolException(e);
+        }
+        return response != null ? response.getData() : null;
+    }
+
+    @Override
     public String delete(String namespace, String profile, String key) {
         Stoo.DeleteKeyResponse response = null;
         try{
@@ -106,7 +122,7 @@ public class StooClient implements StooOperations{
     }
 
     @Override
-    public Map<String, String> getAll(String namespace, String profile) {
+    public Map<String, String> getAllByNamespaceAndProfile(String namespace, String profile) {
         Stoo.GetByNamespaceAndProfileResponse response = null;
         try{
             response = client.getServiceByNamespaceAndProfile(Stoo.GetByNamespaceAndProfileRequest.newBuilder()
@@ -132,6 +148,12 @@ public class StooClient implements StooOperations{
     }
 
     @Override
+    public String setSecretDefault(String key, String value) {
+        verifyDefaultNamespaceAndProfile();
+        return setSecret(stooConfig.getDefaultNamespace(), stooConfig.getDefaultProfile(), key, value);
+    }
+
+    @Override
     public String deleteDefault(String key) {
         verifyDefaultNamespaceAndProfile();
         return delete(stooConfig.getDefaultNamespace(), stooConfig.getDefaultProfile(), key);
@@ -140,7 +162,7 @@ public class StooClient implements StooOperations{
     @Override
     public Map<String, String> getAllDefault() {
         verifyDefaultNamespaceAndProfile();
-        return getAll(stooConfig.getDefaultNamespace(), stooConfig.getDefaultProfile());
+        return getAllByNamespaceAndProfile(stooConfig.getDefaultNamespace(), stooConfig.getDefaultProfile());
     }
 
     public void verifyDefaultNamespaceAndProfile(){

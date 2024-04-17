@@ -5998,14 +5998,16 @@ public final class Stoo {
       "\016SetKeyResponse\022\014\n\004data\030\001 \001(\t\"C\n\020DeleteK" +
       "eyRequest\022\021\n\tnamespace\030\001 \001(\t\022\017\n\007profile\030" +
       "\002 \001(\t\022\013\n\003key\030\003 \001(\t\"!\n\021DeleteKeyResponse\022" +
-      "\014\n\004data\030\001 \001(\t2\221\002\n\tKVService\022)\n\nGetServic" +
+      "\014\n\004data\030\001 \001(\t2\313\002\n\tKVService\022)\n\nGetServic" +
       "e\022\013.GetRequest\032\014.GetResponse\"\000\022h\n\037GetSer" +
       "viceByNamespaceAndProfile\022 .GetByNamespa" +
       "ceAndProfileRequest\032!.GetByNamespaceAndP" +
       "rofileResponse\"\000\0222\n\rSetKeyService\022\016.SetK" +
-      "eyRequest\032\017.SetKeyResponse\"\000\022;\n\020DeleteKe" +
-      "yService\022\021.DeleteKeyRequest\032\022.DeleteKeyR" +
-      "esponse\"\000B\023\n\021com.mwangox.stojab\006proto3"
+      "eyRequest\032\017.SetKeyResponse\"\000\0228\n\023SetSecre" +
+      "tKeyService\022\016.SetKeyRequest\032\017.SetKeyResp" +
+      "onse\"\000\022;\n\020DeleteKeyService\022\021.DeleteKeyRe" +
+      "quest\032\022.DeleteKeyResponse\"\000B\023\n\021com.mwang" +
+      "ox.stojab\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -108,6 +108,37 @@ public final class KVServiceGrpc {
     return getSetKeyServiceMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.mwangox.stoja.Stoo.SetKeyRequest,
+      com.mwangox.stoja.Stoo.SetKeyResponse> getSetSecretKeyServiceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SetSecretKeyService",
+      requestType = com.mwangox.stoja.Stoo.SetKeyRequest.class,
+      responseType = com.mwangox.stoja.Stoo.SetKeyResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.mwangox.stoja.Stoo.SetKeyRequest,
+      com.mwangox.stoja.Stoo.SetKeyResponse> getSetSecretKeyServiceMethod() {
+    io.grpc.MethodDescriptor<com.mwangox.stoja.Stoo.SetKeyRequest, com.mwangox.stoja.Stoo.SetKeyResponse> getSetSecretKeyServiceMethod;
+    if ((getSetSecretKeyServiceMethod = KVServiceGrpc.getSetSecretKeyServiceMethod) == null) {
+      synchronized (KVServiceGrpc.class) {
+        if ((getSetSecretKeyServiceMethod = KVServiceGrpc.getSetSecretKeyServiceMethod) == null) {
+          KVServiceGrpc.getSetSecretKeyServiceMethod = getSetSecretKeyServiceMethod =
+              io.grpc.MethodDescriptor.<com.mwangox.stoja.Stoo.SetKeyRequest, com.mwangox.stoja.Stoo.SetKeyResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetSecretKeyService"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.mwangox.stoja.Stoo.SetKeyRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.mwangox.stoja.Stoo.SetKeyResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new KVServiceMethodDescriptorSupplier("SetSecretKeyService"))
+              .build();
+        }
+      }
+    }
+    return getSetSecretKeyServiceMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.mwangox.stoja.Stoo.DeleteKeyRequest,
       com.mwangox.stoja.Stoo.DeleteKeyResponse> getDeleteKeyServiceMethod;
 
@@ -219,6 +250,16 @@ public final class KVServiceGrpc {
 
     /**
      * <pre>
+     *Set a secret key
+     * </pre>
+     */
+    public void setSecretKeyService(com.mwangox.stoja.Stoo.SetKeyRequest request,
+        io.grpc.stub.StreamObserver<com.mwangox.stoja.Stoo.SetKeyResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetSecretKeyServiceMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      *Delete a key
      * </pre>
      */
@@ -250,6 +291,13 @@ public final class KVServiceGrpc {
                 com.mwangox.stoja.Stoo.SetKeyRequest,
                 com.mwangox.stoja.Stoo.SetKeyResponse>(
                   this, METHODID_SET_KEY_SERVICE)))
+          .addMethod(
+            getSetSecretKeyServiceMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                com.mwangox.stoja.Stoo.SetKeyRequest,
+                com.mwangox.stoja.Stoo.SetKeyResponse>(
+                  this, METHODID_SET_SECRET_KEY_SERVICE)))
           .addMethod(
             getDeleteKeyServiceMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -310,6 +358,17 @@ public final class KVServiceGrpc {
 
     /**
      * <pre>
+     *Set a secret key
+     * </pre>
+     */
+    public void setSecretKeyService(com.mwangox.stoja.Stoo.SetKeyRequest request,
+        io.grpc.stub.StreamObserver<com.mwangox.stoja.Stoo.SetKeyResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSetSecretKeyServiceMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      *Delete a key
      * </pre>
      */
@@ -362,6 +421,16 @@ public final class KVServiceGrpc {
     public com.mwangox.stoja.Stoo.SetKeyResponse setKeyService(com.mwangox.stoja.Stoo.SetKeyRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetKeyServiceMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Set a secret key
+     * </pre>
+     */
+    public com.mwangox.stoja.Stoo.SetKeyResponse setSecretKeyService(com.mwangox.stoja.Stoo.SetKeyRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetSecretKeyServiceMethod(), getCallOptions(), request);
     }
 
     /**
@@ -424,6 +493,17 @@ public final class KVServiceGrpc {
 
     /**
      * <pre>
+     *Set a secret key
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.mwangox.stoja.Stoo.SetKeyResponse> setSecretKeyService(
+        com.mwangox.stoja.Stoo.SetKeyRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSetSecretKeyServiceMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      *Delete a key
      * </pre>
      */
@@ -437,7 +517,8 @@ public final class KVServiceGrpc {
   private static final int METHODID_GET_SERVICE = 0;
   private static final int METHODID_GET_SERVICE_BY_NAMESPACE_AND_PROFILE = 1;
   private static final int METHODID_SET_KEY_SERVICE = 2;
-  private static final int METHODID_DELETE_KEY_SERVICE = 3;
+  private static final int METHODID_SET_SECRET_KEY_SERVICE = 3;
+  private static final int METHODID_DELETE_KEY_SERVICE = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -466,6 +547,10 @@ public final class KVServiceGrpc {
           break;
         case METHODID_SET_KEY_SERVICE:
           serviceImpl.setKeyService((com.mwangox.stoja.Stoo.SetKeyRequest) request,
+              (io.grpc.stub.StreamObserver<com.mwangox.stoja.Stoo.SetKeyResponse>) responseObserver);
+          break;
+        case METHODID_SET_SECRET_KEY_SERVICE:
+          serviceImpl.setSecretKeyService((com.mwangox.stoja.Stoo.SetKeyRequest) request,
               (io.grpc.stub.StreamObserver<com.mwangox.stoja.Stoo.SetKeyResponse>) responseObserver);
           break;
         case METHODID_DELETE_KEY_SERVICE:
@@ -536,6 +621,7 @@ public final class KVServiceGrpc {
               .addMethod(getGetServiceMethod())
               .addMethod(getGetServiceByNamespaceAndProfileMethod())
               .addMethod(getSetKeyServiceMethod())
+              .addMethod(getSetSecretKeyServiceMethod())
               .addMethod(getDeleteKeyServiceMethod())
               .build();
         }

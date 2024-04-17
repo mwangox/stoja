@@ -1,5 +1,5 @@
 syntax = "proto3";
-//protoc --go_out=. --go-grpc_out=. stoo.proto
+
 option java_package = "com.mwangox.stoja";
 
 service KVService {
@@ -9,6 +9,8 @@ service KVService {
   rpc GetServiceByNamespaceAndProfile (GetByNamespaceAndProfileRequest) returns (GetByNamespaceAndProfileResponse) {}
   //Set a key
   rpc SetKeyService(SetKeyRequest) returns (SetKeyResponse){}
+  //Set a secret key
+  rpc SetSecretKeyService(SetKeyRequest) returns (SetKeyResponse){}
   //Delete a key
   rpc DeleteKeyService(DeleteKeyRequest) returns (DeleteKeyResponse){}
 }
