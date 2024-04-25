@@ -9,11 +9,17 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class that implemented the StooOperations  interface {@link StooOperations} and wrap the StooKV stubs for the consumers.
+ * */
 public class StooClient implements StooOperations{
      private final StooConfig stooConfig;
     private final KVServiceGrpc.KVServiceBlockingStub client;
     public static  final long DEFAULT_TIMEOUT_MS = 30000;
 
+    /** Create a StooClient from StooConfig.
+     * @param stooConfig has various configurations to be used to create StooClient instance.
+     * */
     public StooClient(StooConfig stooConfig){
         StooAssertions.shouldNotBeNull(stooConfig, "StooConfig cannot be null");
         this.stooConfig = stooConfig;
@@ -25,9 +31,18 @@ public class StooClient implements StooOperations{
                 .withDeadlineAfter(stooConfig.getTimeoutAfterMs() != 0 ? stooConfig.getTimeoutAfterMs() : DEFAULT_TIMEOUT_MS, TimeUnit.MILLISECONDS);
     }
 
+    /** Convenient method to create StooClient from StooConfig.
+     * @param stooConfig has various configurations to be used to create StooClient instance.
+     * @return StooClient
+     * */
     public static StooClient newStooClient(StooConfig stooConfig){
         return new StooClient(stooConfig);
     }
+
+    /** Create a secured channel from StooConfig.
+     * @param stooConfig various configurations to be used to create a secure channel.
+     * @return ManagedChannel
+     * */
     private static ManagedChannel createSecuredChannel(StooConfig stooConfig) {
         StooConfig.TLS tls = stooConfig.getTls();
         StooAssertions.shouldNotBeNull(tls, "TLS specs must be defined if isTls set to true");

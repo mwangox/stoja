@@ -10,9 +10,10 @@ plugins {
     id 'com.google.protobuf' version "${protobufPluginVersion}"
     id 'java-library'
     id 'maven-publish'
+
    // id 'com.github.johnrengelman.shadow' version '8.1.1'
-   // id 'java'
-    id 'signing'
+    id 'java'
+   // id 'signing'
 }
 
 
@@ -112,8 +113,8 @@ publishing {
 
                 licenses {
                     license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = 'MIT'
+//                        url = ''
                     }
                 }
                 developers {
@@ -146,8 +147,8 @@ publishing {
     }
 }
 
-signing {
-    sign publishing.publications.stoja
-}
+//signing {
+//    sign publishing.publications.stoja
+//}
 
 
