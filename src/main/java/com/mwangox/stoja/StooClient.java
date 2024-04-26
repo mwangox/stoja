@@ -33,7 +33,7 @@ public class StooClient implements StooOperations{
 
     /** Convenient method to create StooClient from StooConfig.
      * @param stooConfig has various configurations to be used to create StooClient instance.
-     * @return StooClient
+     * @return StooClient instance.x
      * */
     public static StooClient newStooClient(StooConfig stooConfig){
         return new StooClient(stooConfig);
@@ -41,7 +41,7 @@ public class StooClient implements StooOperations{
 
     /** Create a secured channel from StooConfig.
      * @param stooConfig various configurations to be used to create a secure channel.
-     * @return ManagedChannel
+     * @return ManagedChannel instance.
      * */
     private static ManagedChannel createSecuredChannel(StooConfig stooConfig) {
         StooConfig.TLS tls = stooConfig.getTls();

@@ -3,18 +3,12 @@
 
 # Stoja
 
-`Stoja` is a library to enqueue and later handle immutable events. It is written in `java` on top of [reactor](https://github.com/reactor) and [lettuce](https://github.com/lettuce-io/lettuce-core).
-[Redis](https://redis.io) is the only available storage engine. Queue doesn't provide durability guarantees but in pair with clusterized `redis` installation
-it is suitable for many use cases.
+`Stoja` is a java client library used to connect to `StooKV`.
 
 Key features are:
-- event handling is retriable at increased intervals between attempts
-- subscription context could be passed to a handler
-- support for the `@PreDestroy` lifecycle annotation
-- sending metrics using [Micrometer](https://github.com/micrometer-metrics/micrometer)
-
-`DelayedQueue` are highly opinionated (hence customizable), with very little configuration needed to start using it.
-If you want more control consider using Netflix's [dyno-queue](https://github.com/Netflix/dyno-queues).
+- SSL/TLS supports.
+- Default namespace and profile.
+- Supports secret and non-secret keys.
 
 ## Installation
 
@@ -29,76 +23,42 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation 'com.github.fred84:delayedQueue:0.4.0'
+    implementation 'com.github.mwangox:stoja:1.0.9'
 }
 ```
-
-`maven jitpack`
-
-## Examples
 
 ### Minimal configuration
 
 ```java
-import static com.github.fred84.queue.DelayedEventService.delayedEventService;
+import com.mwangox.stoja.config.StooConfig;
+import com.mwangox.stoja.StooClient;
 
-var eventService = delayedEventService().client(redisClient).build();
+StooConfig stooConfig =  StooConfig.newDefaultStooConfig();
+StooClient stooClient =  StooClient.newStooClient(stooConfig);
 ```
 
 ### Full configuration
 
 ```java
-import static com.github.fred84.queue.DelayedEventService.delayedEventService;
+import com.mwangox.stoja.config.StooConfig;
+import com.mwangox.stoja.StooClient;
 
-eventService = delayedEventService()
-        .client(redisClient)
-        .mapper(objectMapper)
-        .handlerScheduler(Schedulers.fromExecutorService(executor))
-        .schedulingInterval(Duration.ofSeconds(1))
-        .schedulingBatchSize(SCHEDULING_BATCH_SIZE)
-        .enableScheduling(false)
-        .pollingTimeout(POLLING_TIMEOUT)
-        .eventContextHandler(new DefaultEventContextHandler())
-        .dataSetPrefix("")
-        .retryAttempts(10)
-        .metrics(new NoopMetrics())
-        .refreshSubscriptionsInterval(Duration.ofMinutes(5))
-        .build();
+StooConfig stooConfig =  StooConfig.newStooConfig("localhost:50051")
+        .defaultNamespace("my-app")
+        .defaultProfile("prod")
+        .useTls(true)
+        .tls(StooConfig.TLS.create()
+                .skipTlsVerification(false)
+                .serverNameOverride("stookv.com")
+                .caCertPath("/stoo-kv/ca_cert.pem"));
+StooClient stooClient =  StooClient.newStooClient(stooConfig);
 ```
 
-### Add event handler
+### Examples
 
 ```java
 eventService.addHandler(DummyEvent.class, e -> Mono.just(true), 1);
 ```
 
-### Enqueue event
 
-```java
-eventService.enqueueWithDelayNonBlocking(new DummyEvent("1"), Duration.ofHours(1)).subscribe();
-```
-
-### Close service
-
-```java
-eventService.close();
-```
-
-### Event context
-
-```java
-eventService.addHandler(
-        DummyEvent.class,
-        e -> Mono
-            .subscriberContext()
-            .doOnNext(ctx -> {
-                Map<String, String> eventContext = ctx.get("eventContext");
-                log.info("context key {}", eventContext.get("key"));
-            })
-            .thenReturn(true),
-        1
-);
-
-eventService.enqueueWithDelayNonBlocking(new DummyEvent("1"), Duration.ofHours(1), Map.of("key", "value")).subscribe();
-```
 
