@@ -175,7 +175,7 @@ public class StooClient implements StooOperations{
     }
 
     @Override
-    public Map<String, String> getAllDefault() {
+    public Map<String, String> getAllByDefaultNamespaceAndProfile() {
         verifyDefaultNamespaceAndProfile();
         return getAllByNamespaceAndProfile(stooConfig.getDefaultNamespace(), stooConfig.getDefaultProfile());
     }
