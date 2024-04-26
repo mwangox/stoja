@@ -37,7 +37,7 @@ StooConfig stooConfig =  StooConfig.newDefaultStooConfig();
 StooClient stooClient =  StooClient.newStooClient(stooConfig);
 ```
 
-### Full configuration
+### Extended configuration
 
 ```java
 import com.mwangox.stoja.config.StooConfig;
@@ -57,8 +57,51 @@ StooClient stooClient =  StooClient.newStooClient(stooConfig);
 ### Examples
 
 ```java
-eventService.addHandler(DummyEvent.class, e -> Mono.just(true), 1);
+//Set normal key
+stooClient.set("my-app", "prod", "database.username", "lauryn.hill");
+
+//Get stored value from a key
+String value = stooClient.get("my-app", "prod", "database.username");
+System.out.println(value);
+
+//Set secret key
+stooClient.setSecret("my-app", "prod", "database.password", "theScrore@1996");
+
+//Get all keys
+Map<String, String> kv = stooClient.getAllByNamespaceAndProfile("my-app", "prod");
+System.out.println(kv);
+
+//Delete a key
+stooClient.delete("my-app", "prod", "database.hostname");
+
+//-----------------------------------------------------------------------------//
+//Set normal key to the default namespace and profile
+stooClient.setDefault("database.hostname", "127.0.0.1");
+
+//Get value of a key from the default namespace and profile
+String valueDef = stooClient.getDefault("database.hostname");
+System.out.println(valueDef);
+
+//Set secret key to the default namespace and profile
+stooClient.setSecretDefault("database.hostname", "127.0.0.1");
+
+//Get all keys from the default namespace and profile
+Map<String, String> kvDef = stooClient.getAllByDefaultNamespaceAndProfile();
+System.out.println(kvDef);
+
+//Delete a key from the default namespace and profile
+stooClient.deleteDefault("database.hostname");
 ```
+
+## License
+
+The project is licensed under [MIT license](./MIT-LICENSE).
+
+### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in `stoja` by you, shall be licensed as MIT, without any additional
+terms or conditions.
 
 
 
