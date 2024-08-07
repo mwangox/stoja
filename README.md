@@ -3,7 +3,7 @@
 
 # Stoja
 
-`Stoja` is a java client library used to connect to `StooKV`.
+`Stoja` is a java client library used to connect to [stookv](https://github.com/mwangox/stookv), a key-value datastore.
 
 Key features are:
 - SSL/TLS supports.

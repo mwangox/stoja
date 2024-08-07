@@ -2,7 +2,9 @@ package com.mwangox.stoja;
 
 import lombok.Getter;
 
-/** Exception that will be thrown when there is a communication issue with StooKV server. */
+/**
+ * Exception that will be thrown when there is a communication issue with StooKV server.
+ * */
 @Getter
 public class StooProtocolException extends RuntimeException{
 
